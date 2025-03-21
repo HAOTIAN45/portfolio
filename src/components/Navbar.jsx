@@ -1,23 +1,21 @@
 import React, { useState } from 'react'
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
-import { Link } from 'react-scroll'
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import { motion } from 'framer-motion'
 import GradientText from "../components/GradientText.jsx"
 
 const Navbar = () => {
-    const [nav, setNav] = useState(false)
 
-    const toggleNav = () => {
-        setNav(!nav)
-    }
+    const [isOpen, setIsOpen] = useState(false)
+    const menuItems = ["About", "Portfolio", "Contact"]
 
-    const closeNav = () => {
-        setNav(false)
-    }
+    const toggleNav = () => setIsOpen(!isOpen)
+    const closeNav = () => setIsOpen(false)
+
 
     const menuVariants = {
         open: {
             x: 0,
+            opacity: 1,
             transition: {
                 stiffness: 20,
                 damping: 15
@@ -25,6 +23,7 @@ const Navbar = () => {
         },
         closed: {
             x: '-100%',
+            opacity: 0,
             transition: {
                 stiffness: 20,
                 damping: 15
@@ -33,102 +32,62 @@ const Navbar = () => {
     }
 
     return (
-        <div className='fixed top-0 left-0 w-full bg-opacity-70 backdrop-blur-md z-50'>
-            <div className='max-w-[1300px] mx-auto  flex justify-between text-gray-200
-        text-xl items-center px-12 h-20'>
-
-                <a href="/about">
-                    <GradientText
-                        colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                        animationSpeed={3}
-                        showBorder={false}
-                        className="custom-class"
-                    >
-                        H A O
-                    </GradientText>
-                </a>
-
-                <ul className='hidden md:flex gap-12 z-10 cursor-pointer'>
-                    <li><Link to="skills" smooth={true} offset={50} duration={500}>
+        <div>
+            <div className='flex flex-row justify-between mx-5 py-4 text-xl'>
+                <div>
+                    <a href="/">
                         <GradientText
                             colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
                             animationSpeed={3}
                             showBorder={false}
                             className="custom-class"
                         >
-                            About
+                            H A O
                         </GradientText>
-                    </Link></li>
-                    <li><Link to="portfolio" smooth={true} offset={50} duration={500}>
-                        <GradientText
-                            colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                            animationSpeed={3}
-                            showBorder={false}
-                            className="custom-class"
-                        >
-                            Portfolio
-                        </GradientText>
-                    </Link></li>
-                    <li><Link to="contact" smooth={true} offset={50} duration={500}>
-                        <GradientText
-                            colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                            animationSpeed={3}
-                            showBorder={false}
-                            className="custom-class"
-                        >
-                            Contact
-                        </GradientText>
-                    </Link></li>
-                </ul>
-
-                <div onClick={toggleNav} className='md:hidden z-50 text-gray-200'>
-                    {nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
+                    </a>
                 </div>
-
-                <motion.div
-                    initial={false}
-                    animate={nav ? 'open' : 'closed'}
-                    variants={menuVariants}
-                    className='fixed left-0 top-0 w-full min-h-screen bg-gray-900 z-40'
-                >
-                    <ul className='font-semibold text-4xl space-y-8 mt-24 text-center'>
-                        <li><Link to="skills" onClick={closeNav} smooth={true} offset={50} duration={500}>
-                            <GradientText
-                                colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                                animationSpeed={3}
-                                showBorder={false}
-                                className="custom-class"
-                            >
-                                About
-                            </GradientText>
-                        </Link></li>
-                        <li><Link to="portfolio" onClick={closeNav} smooth={true} offset={50} duration={500}>
-                            <GradientText
-                                colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                                animationSpeed={3}
-                                showBorder={false}
-                                className="custom-class"
-                            >
-                                Portfolio
-                            </GradientText>
-                        </Link></li>
-                        <li><Link to="contact" onClick={closeNav} smooth={true} offset={50} duration={500}>
-                            <GradientText
-                                colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                                animationSpeed={3}
-                                showBorder={false}
-                                className="custom-class"
-                            >
-                                Contact
-                            </GradientText>
-                        </Link></li>
+                <div>
+                    <ul className='hidden md:flex flex-row gap-7'>
+                        {menuItems.map((item, index) => (
+                            <li key={index}>
+                                <GradientText
+                                    colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                                    animationSpeed={3}
+                                    showBorder={false}
+                                    className="custom-class"
+                                >
+                                    {item}
+                                </GradientText>
+                            </li>
+                        ))}
                     </ul>
 
+                    <div onClick={toggleNav} className='md:hidden z-50 text-gray-200 cursor-pointer'>
+                        {isOpen ? <AiOutlineClose size={25} /> : <AiOutlineMenu size={25} />}
+                    </div>
 
-                </motion.div>
-
-
-
+                    <motion.div
+                        className='fixed top-0 left-0 w-1/2 h-full bg-gradient-to-t from-black via-purple-900 to-black text-white flex flex-col items-center justify-center z-50 md:hidden'
+                        animate={isOpen ? "open" : "closed"}
+                        initial="closed"
+                        variants={menuVariants}
+                    >
+                        <ul className='flex flex-col gap-6 text-lg'>
+                            {menuItems.map((item, index) => (
+                                <li key={index} onClick={closeNav} className='cursor-pointer'>
+                                    <GradientText
+                                        colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                                        animationSpeed={3}
+                                        showBorder={false}
+                                        className="custom-class"
+                                    >
+                                        {item}
+                                    </GradientText>
+                                </li>
+                            ))}
+                        </ul>
+                    </motion.div>
+                </div>
             </div>
         </div>
     )
