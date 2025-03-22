@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-scroll";
 import GradientText from "./GradientText";
 
 const Hero = () => {
@@ -34,12 +35,15 @@ const Hero = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
       >
-        <a
-          href="#portfolio"
-          className="px-6 py-3 bg-gradient-to-tr from-blue-700 to-purple-900 rounded-lg text-black font-semibold hover:from-purple-900 hover:to-blue-700"
+        <Link
+          to="portfolio"
+          smooth={true}
+          duration={1000}
+          offset={300}
+          className="px-6 py-3 bg-gradient-to-tr from-blue-700 to-purple-900 rounded-lg text-black font-semibold hover:from-purple-900 hover:to-blue-700 hover:text-white transition-all duration-1000 ease-in-out"
         >
           View Portfolio
-        </a>
+        </Link>
         <a
           href="#contact"
           className="px-6 py-3 border border-white hover:bg-white hover:text-black rounded-lg transition"
