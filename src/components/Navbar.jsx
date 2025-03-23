@@ -71,6 +71,7 @@ const Navbar = () => {
                         animate={isOpen ? "open" : "closed"}
                         initial="closed"
                         variants={menuVariants}
+                        onClick={closeNav}
                     >
                         <ul className='flex flex-col gap-6 text-lg'>
                             {menuItems.map((item, index) => (
