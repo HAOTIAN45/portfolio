@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai"
 import { motion } from 'framer-motion'
+import { Link } from 'react-scroll'
 import GradientText from "../components/GradientText.jsx"
 
 const Navbar = () => {
 
     const [isOpen, setIsOpen] = useState(false)
-    const menuItems = ["About", "Portfolio", "Contact"]
+    const menuItems = ["About", "Portfolio", "TechStack"]
 
     const toggleNav = () => setIsOpen(!isOpen)
     const closeNav = () => setIsOpen(false)
@@ -32,7 +33,7 @@ const Navbar = () => {
     }
 
     return (
-        <div>
+        <div className='fixed top-0 left-0 w-full backdrop-blur-md shadow-md z-50'>
             <div className='flex flex-row justify-between mx-5 py-4 text-xl'>
                 <div>
                     <a href="/">
@@ -67,7 +68,7 @@ const Navbar = () => {
                     </div>
 
                     <motion.div
-                        className='fixed top-0 left-0 w-1/2 h-full bg-gradient-to-t from-black via-purple-900 to-black text-white flex flex-col items-center justify-center z-50 md:hidden'
+                        className='fixed top-0 left-0 w-1/2 h-screen bg-gradient-to-t from-black via-purple-900 to-black text-white flex flex-col items-center justify-center z-[100] md:hidden'
                         animate={isOpen ? "open" : "closed"}
                         initial="closed"
                         variants={menuVariants}
@@ -76,14 +77,22 @@ const Navbar = () => {
                         <ul className='flex flex-col gap-6 text-lg'>
                             {menuItems.map((item, index) => (
                                 <li key={index} onClick={closeNav} className='cursor-pointer'>
-                                    <GradientText
-                                        colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                                        animationSpeed={3}
-                                        showBorder={false}
-                                        className="custom-class"
+                                    <Link
+                                    to = "techstack"
+                                    smooth = {true}
+                                    duration={1000}
+                                    offset={200}
+                                    onClick={closeNav}
                                     >
-                                        {item}
-                                    </GradientText>
+                                        <GradientText
+                                            colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                                            animationSpeed={3}
+                                            showBorder={false}
+                                            className="custom-class"
+                                        >
+                                            {item}
+                                        </GradientText>
+                                    </Link>
                                 </li>
                             ))}
                         </ul>

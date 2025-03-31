@@ -26,7 +26,7 @@ const Portfolio = () => {
             id='portfolio'
             className='min-h-screen bg-black text-white flex flex-col items-center justify-center px-5'>
             <motion.h2
-                className='text-4xl font-bold pb-2 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent'
+                className='text-4xl my-4 font-bold pb-2 bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent'
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 1 }}
@@ -52,6 +52,7 @@ const Portfolio = () => {
                     </motion.div>
                 ))}
             </motion.div>
+
         </div>
     )
 }
