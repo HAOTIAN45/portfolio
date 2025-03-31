@@ -29,10 +29,10 @@ const TechStack = () => {
                     {Techs.map((item, index) => (
                         <motion.div
                             key={index}
-                            className="flex items-center justify-center border border-gray-500 px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 transition duration-300"
+                            className="flex items-center justify-center border border-gray-500 px-6 py-3 rounded-lg bg-gray-800 hover:bg-gray-700 hover:scale-110 transition duration-300"
                             initial={{ opacity: 0, scale: 0.8 }}
                             whileInView={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 0.4, delay: index * 0.2 }}
+                            transition={{ duration: 0.4, delay: index * 0.5 }}
                         >
                             {item}
                         </motion.div>
